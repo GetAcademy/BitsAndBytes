@@ -1,0 +1,153 @@
+123
+1 - hundrere
+2 - tiere
+3 - enere
+
+101
+1 - firere
+0 - toere
+1 - enere
+verdi: 5
+
+10010
+1 - 16*1=16
+0 - 8*0=0
+0 - 4*0=0
+1 - 2*1=2
+0 - 1*0=0
+verdi: 18
+
+57
+
+00111001
+
+1 * 32 = 32
+rest: 25
+1 * 16 = 16
+rest: 9
+1 * 8 = 8
+rest: 1
+0 * 4 = 0
+rest: 1
+0 * 2 = 0
+rest: 1
+1 * 1 = 1
+rest: 0
+
+-------------------------------
+
+bitwise logiske operatorer
+
+    0000 1100 (12)
+AND 0000 1010 (10)
+=   0000 1000 (8)
+
+
+    0000 1100 (12)
+OR  0000 1010 (10)
+=   0000 1110 (14)
+
+NOT 0000 1010 (10)
+=   1111 0101 (245)
+    -111 0101
+
+
+    0000 1100 (12)
+XOR 0000 1010 (10)
+=   0000 0110 (6)
+
+
+
+Byte - venstre bit til fortegn
+1111 1111 -1
+1111 1101 -2
+1111 1100 -3
+
+Byte 1010 betyr
+Biff = 1 = ja (8)
+Bacon = 0 = nei (4)
+Kylling = 1 = ja (2)
+Pepperoni = 0 = nei (1)
+
+0000 betyr ingenting (0)
+1111 betyr alt (15)
+1010 betyr biff og kylling (10)
+
+Hvordan leser jeg et bestemt flagg?
+    x
+AND 0100 (4)
+sammenligne > 0 eller == 0
+
+Hvordan endrer jeg et bestemt flagg?
+
+Sette bacon til true
+   x
+OR 0100
+= ny verdi x
+
+Sette bacon til false
+    x
+AND 1011
+= ny verdi x
+
+https://docs.microsoft.com/en-us/sql/t-sql/language-elements/bitwise-operators-transact-sql?view=sql-server-ver16
+
+
+
+
+Vi har verdien 254 - er bit-en 4 satt?
+
+    1. gjør om til binært: 
+    1111 1110
+
+    2. ANDer med 4
+        1111 1110
+    AND 0000 0100 (4)
+    =   0000 0100
+    hvis tallet er 0, er bit-en ikke satt
+    hvis tallet er >0, er bit-en satt
+
+    select IIF (  254 & 4 > 0, 'TRUE', 'FALSE' ) as Bit4IsSet
+
+    
+Vi har verdien 241 - sørg for å sette bit 4
+
+    1. gjør om til binært: 
+        1111 0001
+
+    2. ORer med 4
+        1111 0001 (241)
+    OR  0000 0100 (4)
+    =   1111 0101 (245)
+
+    update numbers
+    set number = number | 4
+    where id = 1
+
+Vi har verdien 241 - sørg for å sette bit 4, 2 og 1
+
+    1. gjør om til binært: 
+        1111 0001
+
+    2. ORer med 4
+        1111 0001 (241)
+    OR  0000 0111 (7)
+    =   1111 0101 (248)
+
+    update numbers
+    set number = number | 7
+    where id = 1
+
+Vi har verdien 241 - sørg for å skru av bit 4, 2 og 1
+
+    1. gjør om til binært: 
+        1111 0001
+
+    2. ORer med 4
+        1111 0001 (241)
+    AND 1111 1000 (248)
+    =   1111 1000 (240)
+
+    update numbers
+    set number = number & 248
+    where id = 1
